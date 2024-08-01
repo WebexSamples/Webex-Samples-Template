@@ -1,0 +1,33 @@
+name: Prettier
+
+on: [pull_request]
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    outputs:
+      package-lock-exists: ${{ steps.check-lock.outputs.package-lock-exists }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Check for package-lock.json
+        id: check-lock
+        run: |
+          echo "package-lock-exists=$(if [ -f package-lock.json ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
+          echo "::set-output name=package-lock-exists::$(if [ -f package-lock.json ]; then echo 'true'; else echo 'false'; fi)"
+
+      - name: Use Node.js
+        if: ${{ steps.check-lock.outputs.package-lock-exists == 'true' }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        if: ${{ steps.check-lock.outputs.package-lock-exists == 'true' }}
+        run: npm ci
+
+      - name: Check formatting
+        if: ${{ steps.check-lock.outputs.package-lock-exists == 'true' }}
+        run: npx prettier --check .

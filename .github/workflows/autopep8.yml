@@ -1,0 +1,24 @@
+name: autopep8
+on: pull_request
+jobs:
+  autopep8:
+    # Check if the PR is not from a fork
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: autopep8
+        uses: peter-evans/autopep8@v2
+        with:
+          args: --exit-code --recursive --in-place --aggressive --aggressive .
+      - name: Check for changes
+        id: git-check
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "autopep8 has made changes to the code."
+            exit 1
+          else
+            echo "No changes were made by autopep8."
+          fi
