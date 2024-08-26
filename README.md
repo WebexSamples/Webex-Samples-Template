@@ -1,49 +1,64 @@
-# Sidebar Embedded App
+# Webex Samples Template
 
-This Webex Sample App showcases the [Embedded App Sidebar](https://developer.webex.com/docs/embedded-apps-framework-sidebar-api-quick-start) feature.
-This application is a mock customer relationship manager tool that utilizes the Embedded App SDK to look up customer data of an incoming Webex Call.
+This is the Webex Samples repo template, which must be used for all code contributions. 
 
-## Setup
+Using templates varies from directly forking a repo. The commit history is cleaned, and there is no link to the original repository. This will give your new repository all the framework needed but without the history or link to other repos. It will be easier to track your changes, and your work will not be tied to the repository’s other forks. 
 
-Follow these steps to set up and run this project:
+To use this template, [follow these directions to create your new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template). Add your project code to the new repo. Then, reach out to Adam Weeks(adweeks) or Ashton Jordan (ashjorda) to have your new repo added to this Github Organization. All newly created repos are set to private by default. Once all Github actions have passed, and your repo is complete, contact to Adam or Ashton for review to make the repo Public. 
 
-1. **Clone the repository**: First, clone this repository to your local machine using `git clone git@github.com:WebexSamples/CallMonitorApp.git`.
+This template repo also contains a sample README, that outlines sections you should include in your README to help properly describe the repo's contents. 
 
-2. **Install dependencies**: Navigate to the project directory and run `npm install` to install the necessary dependencies.
+## Usage
 
-3. **Start Server**: Run the server for the application with `npm start`.
+1. **Clone the repository**: First, clone this repository to your local machine using `git clone git@github.com:WebexSamples/Webex-Samples-Template.git`.
 
-4. **Add Webex Embedded App**: Follow the instructions [here](https://developer.webex.com/docs/embedded-apps-guide) to create a new Webex Embedded App with the Start URL configured as your server's address.
-
-## Code Formatting
-
-This project uses [Prettier](https://prettier.io/) to maintain code consistency. To format your code, run:
-
-```bash
-npm run format
-```
+2. **Install dependencies**: Install prettier/autopep8 as per the below instructions under "GitHub Actions" section
 
 ## Github Actions
 
-This project uses a GitHub Actions workflow to check if the code is formatted correctly with Prettier. The workflow runs on every pull request.
+This template uses GitHub Actions workflow to enforce commonly accepted coding practices across various file formats. We use [Prettier](https://prettier.io), and [AutoPep8](https://pypi.org/project/autopep8/) for these linting workflows. These workflows run on every pull request. And before merging is allowed, these workflows must pass. During these workflow checks, none of your code will be modified. These checks are commonly focused on spacing and proper tabbing.  
 
-Here's a brief overview of the steps in the workflow:
 
-1. Check out code: This step checks out your repository's code so the workflow can access it.
+## Installing Prettier via npm (Local Machine)
 
-1. Use Node.js: This step sets up a specific version of Node.js on the runner. In this case, it's version 20.
+**Note: Prettier documentation link: (https://prettier.io/docs/en/install.html)**
 
-1. Install dependencies: This step installs the project's dependencies using npm ci.
+To format your code locally, run the following:
 
-1. Check formatting: This step runs npx prettier --check . to check if all files are formatted correctly. If any files are not formatted correctly, this command will fail, and so will the GitHub Action, causing the PR to be marked as failed.
+1. Install prettier
+```bash
+npm install --save-dev --save-exact prettier
+```
 
-To see the results of the workflow, navigate to the "Actions" tab in your GitHub repository.
+2. Checking what changes prettier would like to make on  all the files within your repo. Before writing them:
+```bash
+npx prettier . --check
+```
 
-## Don't be a Stranger
+3. To write the proposed changes, to ensure the prettier workflow passes. Use the following command:
+```bash
+npx prettier . --write
+```
 
-- https://developer.webex.com/docs
-- https://developer.webex.com/blog
-- https://developer.webex.com/support
-- @WebexDevs: https://twitter.com/webexdevs
+## Installing AutoPep8 via pip (Local Machine)
 
-Made with <3 by the Webex Developer Evangelism Team at Cisco
+**Note: Autopep8 Documentation: (https://pypi.org/project/autopep8/)**
+
+To format your code locally, run the following:
+
+1. Install autopep8
+```bash
+pip install --upgrade autopep8
+```
+
+2. Checking what changes prettier would like to make on  all the files within your repo. Before writing them:
+```bash
+autopep8 -r --diff --aggressive --aggressive .
+```
+
+3. To write the proposed changes, to ensure the prettier workflow passes. Use the following command:
+```bash
+autopep8 -r -i --aggressive --aggressive .
+```
+
+Made with <3 by the Webex Developer Relations Team at Cisco
