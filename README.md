@@ -101,7 +101,14 @@ To configure Husky and lint-staged in your own project, you can follow the steps
 npm install
 ```
 
-2. Commit your code!
+2. Enable pre-commit hooks by removing the comments from the [.husky/pre-commit](.husky/pre-commit) file:
+
+```
+# npx lint-staged
+# ruff check --fix .
+```
+
+3. Save the changes and commit them to your repository. The pre-commit hooks will now run automatically before each commit, ensuring that the code is properly formatted and styled.
 
 ## Skipping Hooks
 
